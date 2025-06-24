@@ -1,0 +1,212 @@
+/* Dark Mode Colors */
+:root {
+    --bg: ##ffffff;
+    --surface: #f4f6f9;
+    --text: #1f1f1f;
+    --text-muted: #aaa;
+    --accent: #0077b6;
+    --surface-hover: #2a2a2a;
+    --border: #e5e5e5;
+}
+
+/* Base Styles & Smooth Scroll */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+.montserrat-<uniquifier > {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* Container */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+header {
+    /*background: url("images/bg.png") center center / cover no-repeat fixed;
+    */
+    background: var(--surface);
+    text-align: center;
+    padding: 8rem 2rem 6rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    position: relative;
+}
+
+/* Content wrapper with dark box */
+header .text-box {
+    background: rgba(0, 0, 0, 0.1); /* Darker box */
+    display: inline-block;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 0 auto;
+    z-index: 1;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+}
+
+.logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.logo {
+    width: 250px;
+    height: 250px;
+}
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+header p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+}
+
+/* Sections */
+.section {
+    padding: 4rem 0;
+}
+h2 {
+    font-size: 2rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+}
+h3 {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+
+/* Service Cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+.card {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+.cardwide {
+    background: var(--surface);
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+.cardwide:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+img {
+    border-radius: 12px;
+}
+
+/* Links */
+a {
+    color: var(--accent);
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: var(--surface);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.neural-network {
+    position: absolute;
+    top: 0;
+    width: 100px;
+    pointer-events: none;
+    z-index: -1;
+    overflow: visible;
+}
+
+.neural-network.left {
+    left: 0;
+}
+
+.neural-network.right {
+    right: 0;
+}
+
+.node {
+    fill: var(--accent);
+    opacity: 0.9;
+}
+
+.link {
+    stroke: var(--accent);
+    stroke-width: 1;
+    opacity: 0.25;
+    stroke-dasharray: 3;
+    animation: flickerLine 4s linear infinite;
+}
+
+@keyframes flickerLine {
+    0% {
+        stroke-dashoffset: 0;
+        opacity: 0.2;
+    }
+    50% {
+        stroke-dashoffset: 3;
+        opacity: 0.4;
+    }
+    100% {
+        stroke-dashoffset: 6;
+        opacity: 0.2;
+    }
+}
