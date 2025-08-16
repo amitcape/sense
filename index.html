@@ -20,7 +20,24 @@
     </head>
 
     <body>
-        <header>
+        <nav class="nav-banner">
+            <div class="nav-container">
+                <a href="#home" class="logo-banner">Sens-AI</a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#our mission">Our Mission</a></li>
+                    <li><a href="#what we offer">Services</a></li>
+                    <li><a href="#current projects">Projects</a></li>
+                    <li><a href="#our team">Our Team</a></li>
+                    <li><a href="#contact us">Contact Us</a></li>
+                </ul>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    ☰
+                </button>
+            </div>
+        </nav>
+
+        <header id="home">
             <div class="container">
                 <div class="logo-wrap">
                     <!-- Inline SVG logo -->
@@ -37,7 +54,7 @@
                 </p>
             </div>
         </header>
-        <section class="section" data-aos="fade-up">
+        <section id="our mission" class="section" data-aos="fade-up">
             <div class="container">
                 <h2>Our Mission</h2>
                 <p>
@@ -49,7 +66,12 @@
             </div>
         </section>
 
-        <section class="section" data-aos="fade-up" data-aos-delay="100">
+        <section
+            id="what we offer"
+            class="section"
+            data-aos="fade-up"
+            data-aos-delay="100"
+        >
             <div class="container">
                 <h2>What We Offer</h2>
                 <div class="grid">
@@ -89,7 +111,12 @@
                 </div>
             </div>
         </section>
-        <section class="section" data-aos="fade_up" data-aos-delay="200">
+        <section
+            id="current projects"
+            class="section"
+            data-aos="fade_up"
+            data-aos-delay="200"
+        >
             <div class="container">
                 <h2>Current Projects</h2>
                 <div class="cardwide">
@@ -139,21 +166,26 @@
             </div>
         </section>
 
-        <section class="section" data-aos="fade_up" data-aos-delay="200">
+        <section
+            id="our team"
+            class="section"
+            data-aos="fade_up"
+            data-aos-delay="200"
+        >
             <div class="container">
                 <h2>Our Team</h2>
                 <div class="cardwide">
-                    <div class="grid">
+                    <div class="gridCenter">
                         <div class="container">
                             <img
-                                src="images/logo.png"
-                                alt="Sens-AI Logo"
-                                class="logo"
+                                src="images/Staff/AKM.png"
+                                alt="Amit"
+                                class="staff"
                             />
                         </div>
                         <div class="container">
                             <h3>Founder - CEO</h3>
-                            <h4>Amit Mishra</h4>
+                            <h4>Amit Kumar Mishra</h4>
                             <p>
                                 Our expertise in software engineering, combined
                                 with advanced radar and electronic defense
@@ -166,17 +198,17 @@
                 </div>
 
                 <div class="cardwide">
-                    <div class="grid">
+                    <div class="gridCenter">
                         <div class="container">
                             <img
-                                src="images/logo.png"
-                                alt="Sens-AI Logo"
-                                class="logo"
+                                src="images/Staff/HSS.jpeg"
+                                alt="Hannah"
+                                class="staff"
                             />
                         </div>
                         <div class="container">
                             <h3>Head of Business Development</h3>
-                            <h4>Hannah Singkuai</h4>
+                            <h4>Hannah Salsabila Singkuai</h4>
                             <p>
                                 Our expertise in software engineering combined
                                 with advanced sensor systems and machine
@@ -190,39 +222,43 @@
                 </div>
 
                 <div class="cardwide">
-                    <div class="grid">
+                    <div class="gridCenter">
                         <div class="container">
                             <img
-                                src="images/logo.png"
-                                alt="Sens-AI Logo"
+                                src="images/Staff/TB.jpg"
+                                alt="Travis"
                                 class="staff"
                             />
                         </div>
                         <div class="container">
-                            <h3>Founder - Project Development</h3>
+                            <h3>Founder - CTO</h3>
                             <h4>Travis Barrett</h4>
+                            <p>
+                                Our expertise in software engineering combined
+                                with advanced sensor systems and machine
+                                learning/AI calibration methods allows us to
+                                provide insights that can help you achieve more
+                                accurate data and process results at a
+                                cost-effective level.
+                            </p>
                         </div>
                     </div>
-                    <p>
-                        Our expertise in software engineering combined with
-                        advanced sensor systems and machine learning/AI
-                        calibration methods allows us to provide insights that
-                        can help you achieve more accurate data and process
-                        results at a cost-effective level.
-                    </p>
                 </div>
             </div>
         </section>
 
-        <section class="section" data-aos="fade-up" data-aos-delay="200">
+        <section
+            id="contact us"
+            class="section"
+            data-aos="fade-up"
+            data-aos-delay="200"
+        >
             <div class="container">
                 <h2>Contact Us</h2>
                 <p>
                     Email: <a href="mailto:amit@sens-ai.uk">amit@sens-ai.uk</a>
                 </p>
-                <p>
-                    Website: <a href="https://sens-ai.uk">https://sens-ai.uk</a>
-                </p>
+                <p>Website: <a href="https://www.sens-ai.uk">sens-ai.uk</a></p>
                 <p>Location: Wales, United Kingdom</p>
             </div>
         </section>
