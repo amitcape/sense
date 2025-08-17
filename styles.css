@@ -184,9 +184,9 @@ footer {
     color: var(--text-muted);
 }
 
+/* Neural networks that start after header */
 .neural-network {
-    position: absolute;
-    top: 0;
+    position: absolute !important;
     width: 100px;
     pointer-events: none;
     z-index: -1;
@@ -202,30 +202,81 @@ footer {
 }
 
 .node {
-    fill: var(--accent);
-    opacity: 0.9;
+    fill: #0077b6 !important;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 4px rgba(0, 119, 182, 0.3));
 }
 
 .link {
-    stroke: var(--accent);
-    stroke-width: 1;
-    opacity: 0.25;
-    stroke-dasharray: 3;
-    animation: flickerLine 4s linear infinite;
+    stroke: #0077b6 !important;
+    stroke-width: 1.5;
+    opacity: 0.4;
+    stroke-linecap: round;
+    fill: none;
 }
 
-@keyframes flickerLine {
-    0% {
-        stroke-dashoffset: 0;
-        opacity: 0.2;
+/* Simple animations */
+@keyframes pulseNode {
+    0%,
+    100% {
+        opacity: 0.8;
     }
     50% {
-        stroke-dashoffset: 3;
-        opacity: 0.4;
+        opacity: 1;
+    }
+}
+
+@keyframes flowLine {
+    0% {
+        stroke-dasharray: 0, 10;
+        opacity: 0.3;
+    }
+    50% {
+        stroke-dasharray: 5, 5;
+        opacity: 0.6;
     }
     100% {
-        stroke-dashoffset: 6;
-        opacity: 0.2;
+        stroke-dasharray: 10, 0;
+        opacity: 0.3;
+    }
+}
+
+.node:nth-child(odd) {
+    animation: pulseNode 3s ease-in-out infinite;
+}
+
+.node:nth-child(even) {
+    animation: pulseNode 3s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.link:nth-child(odd) {
+    animation: flowLine 3s linear infinite;
+}
+
+.link:nth-child(even) {
+    animation: flowLine 3s linear infinite;
+    animation-delay: 1s;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .neural-network {
+        width: 60px;
+    }
+
+    .neural-network.left {
+        left: -20px;
+    }
+
+    .neural-network.right {
+        right: -20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .neural-network {
+        display: none; /* Hide on very small screens */
     }
 }
 /* Nav Banner */

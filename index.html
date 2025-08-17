@@ -279,49 +279,393 @@
             });
         </script>
         <svg
-            id="neural-right"
-            class="neural-network right"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <g class="network-group">
-                <circle cx="15" cy="800" r="8" class="node" />
-                <circle cx="30" cy="1200" r="8" class="node" />
-                <circle cx="10" cy="1600" r="8" class="node" />
-                <circle cx="20" cy="2000" r="8" class="node" />
-                <line x1="15" y1="800" x2="30" y2="1200" class="link" />
-                <line x1="30" y1="1200" x2="10" y2="1600" class="link" />
-                <line x1="10" y1="1600" x2="20" y2="2000" class="link" />
-            </g>
-        </svg>
-
-        <svg
             id="neural-left"
             class="neural-network left"
             xmlns="http://www.w3.org/2000/svg"
         >
             <g class="network-group">
-                <circle cx="85" cy="800" r="8" class="node" />
-                <circle cx="50" cy="1200" r="8" class="node" />
-                <circle cx="65" cy="1600" r="8" class="node" />
-                <circle cx="40" cy="2000" r="8" class="node" />
-                <line x1="85" y1="800" x2="50" y2="1200" class="link" />
-                <line x1="50" y1="1200" x2="65" y2="1600" class="link" />
-                <line x1="65" y1="1600" x2="40" y2="2000" class="link" />
+                <!-- Nodes will be generated dynamically by JavaScript -->
             </g>
         </svg>
 
+        <svg
+            id="neural-right"
+            class="neural-network right"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <g class="network-group">
+                <!-- Nodes will be generated dynamically by JavaScript -->
+            </g>
+        </svg>
         <script>
-            function resizeNetworks() {
-                const bodyHeight = document.body.scrollHeight;
+            // Mobile menu function
+            function toggleMobileMenu() {
+                const navLinks = document.getElementById("navLinks");
+                if (navLinks) {
+                    navLinks.classList.toggle("active");
+                }
+            }
 
-                document.querySelectorAll(".neural-network").forEach((svg) => {
-                    svg.setAttribute("height", bodyHeight);
-                    svg.setAttribute("viewBox", `0 0 100 ${bodyHeight}`);
+            // Handle mobile menu clicks
+            document.addEventListener("DOMContentLoaded", function () {
+                const navLinks = document.querySelectorAll(".nav-links a");
+                navLinks.forEach((link) => {
+                    link.addEventListener("click", () => {
+                        const navLinksContainer =
+                            document.getElementById("navLinks");
+                        if (navLinksContainer) {
+                            navLinksContainer.classList.remove("active");
+                        }
+                    });
+                });
+            });
+
+            // Generate neural networks between specific sections
+            function generateSectionNeuralNetworks() {
+                // Find the specific sections by their IDs
+                const startSection = document.querySelector(
+                    '#our\\ mission, section[id="our mission"], section[id="our-mission"]',
+                );
+                const endSection = document.querySelector(
+                    '#contact\\ us, section[id="contact us"], section[id="contact-us"], section[id="contact"]',
+                );
+
+                const leftSvg = document.getElementById("neural-left");
+                const rightSvg = document.getElementById("neural-right");
+
+                if (!startSection || !endSection || !leftSvg || !rightSvg) {
+                    console.log("Missing sections or SVG elements");
+                    console.log("Start section found:", !!startSection);
+                    console.log("End section found:", !!endSection);
+                    console.log("Left SVG found:", !!leftSvg);
+                    console.log("Right SVG found:", !!rightSvg);
+                    return;
+                }
+
+                // Calculate dimensions
+                const startTop = startSection.offsetTop;
+                const endTop = endSection.offsetTop;
+                const endHeight = endSection.offsetHeight;
+                const endBottom = endTop + endHeight;
+
+                const networkHeight = endBottom - startTop;
+                const startY = startTop;
+
+                console.log("Start section top:", startTop);
+                console.log("End section bottom:", endBottom);
+                console.log("Network height:", networkHeight);
+                console.log("Network starts at:", startY);
+
+                // Calculate number of nodes (one every 120px, minimum 4)
+                const nodeSpacing = 120;
+                const nodeCount = Math.max(
+                    4,
+                    Math.floor(networkHeight / nodeSpacing),
+                );
+                const actualSpacing = networkHeight / (nodeCount + 1); // +1 for padding
+
+                console.log("Node count:", nodeCount);
+                console.log("Node spacing:", actualSpacing);
+
+                // Position and size the SVGs
+                [leftSvg, rightSvg].forEach((svg) => {
+                    svg.setAttribute("height", networkHeight);
+                    svg.setAttribute("viewBox", `0 0 100 ${networkHeight}`);
+                    svg.style.top = startY + "px";
+                });
+
+                // Clear existing content
+                const leftGroup = leftSvg.querySelector(".network-group");
+                const rightGroup = rightSvg.querySelector(".network-group");
+                leftGroup.innerHTML = "";
+                rightGroup.innerHTML = "";
+
+                // Generate LEFT side nodes and connections
+                const leftNodes = [];
+                for (let i = 0; i < nodeCount; i++) {
+                    const y = actualSpacing * (i + 1); // Start with some padding
+                    const baseX = 75;
+                    const x = baseX + Math.sin(i * 0.8) * 15; // Subtle wave pattern
+
+                    // Create node
+                    const node = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "circle",
+                    );
+                    node.setAttribute("cx", x);
+                    node.setAttribute("cy", y);
+                    node.setAttribute("r", 6);
+                    node.setAttribute("class", "node");
+                    leftGroup.appendChild(node);
+
+                    leftNodes.push({ x, y });
+
+                    // Connect to previous node
+                    if (i > 0) {
+                        const line = document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "line",
+                        );
+                        line.setAttribute("x1", leftNodes[i - 1].x);
+                        line.setAttribute("y1", leftNodes[i - 1].y);
+                        line.setAttribute("x2", x);
+                        line.setAttribute("y2", y);
+                        line.setAttribute("class", "link");
+                        leftGroup.appendChild(line);
+                    }
+                }
+
+                // Generate RIGHT side nodes and connections
+                const rightNodes = [];
+                for (let i = 0; i < nodeCount; i++) {
+                    const y = actualSpacing * (i + 1); // Start with some padding
+                    const baseX = 25;
+                    const x = baseX + Math.sin(i * 1.2) * 15; // Different wave pattern
+
+                    // Create node
+                    const node = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "circle",
+                    );
+                    node.setAttribute("cx", x);
+                    node.setAttribute("cy", y);
+                    node.setAttribute("r", 6);
+                    node.setAttribute("class", "node");
+                    rightGroup.appendChild(node);
+
+                    rightNodes.push({ x, y });
+
+                    // Connect to previous node
+                    if (i > 0) {
+                        const line = document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "line",
+                        );
+                        line.setAttribute("x1", rightNodes[i - 1].x);
+                        line.setAttribute("y1", rightNodes[i - 1].y);
+                        line.setAttribute("x2", x);
+                        line.setAttribute("y2", y);
+                        line.setAttribute("class", "link");
+                        rightGroup.appendChild(line);
+                    }
+                }
+
+                console.log(
+                    "Generated",
+                    nodeCount,
+                    "nodes on each side between sections",
+                );
+            }
+
+            // Alternative function to find sections by text content if IDs don't work
+            function findSectionByHeading(headingText) {
+                const headings = document.querySelectorAll("h2");
+                for (let heading of headings) {
+                    if (
+                        heading.textContent
+                            .toLowerCase()
+                            .includes(headingText.toLowerCase())
+                    ) {
+                        return (
+                            heading.closest("section") || heading.parentElement
+                        );
+                    }
+                }
+                return null;
+            }
+
+            // Fallback function using text content
+            function generateSectionNeuralNetworksFallback() {
+                const startSection =
+                    findSectionByHeading("Our Mission") ||
+                    findSectionByHeading("Mission");
+                const endSection =
+                    findSectionByHeading("Contact Us") ||
+                    findSectionByHeading("Contact");
+
+                const leftSvg = document.getElementById("neural-left");
+                const rightSvg = document.getElementById("neural-right");
+
+                if (!startSection || !endSection || !leftSvg || !rightSvg) {
+                    console.log("Fallback: Missing sections or SVG elements");
+                    return;
+                }
+
+                console.log(
+                    "Using fallback method - found sections by heading text",
+                );
+
+                // Same logic as above but using the found sections
+                const startTop = startSection.offsetTop;
+                const endTop = endSection.offsetTop;
+                const endHeight = endSection.offsetHeight;
+                const endBottom = endTop + endHeight;
+
+                const networkHeight = endBottom - startTop;
+                const startY = startTop;
+
+                console.log(
+                    "Fallback - Start:",
+                    startTop,
+                    "End:",
+                    endBottom,
+                    "Height:",
+                    networkHeight,
+                );
+
+                const nodeSpacing = 120;
+                const nodeCount = Math.max(
+                    4,
+                    Math.floor(networkHeight / nodeSpacing),
+                );
+                const actualSpacing = networkHeight / (nodeCount + 1);
+
+                [leftSvg, rightSvg].forEach((svg) => {
+                    svg.setAttribute("height", networkHeight);
+                    svg.setAttribute("viewBox", `0 0 100 ${networkHeight}`);
+                    svg.style.top = startY + "px";
+                });
+
+                const leftGroup = leftSvg.querySelector(".network-group");
+                const rightGroup = rightSvg.querySelector(".network-group");
+                leftGroup.innerHTML = "";
+                rightGroup.innerHTML = "";
+
+                // Generate nodes (same as above)
+                const leftNodes = [];
+                for (let i = 0; i < nodeCount; i++) {
+                    const y = actualSpacing * (i + 1);
+                    const x = 75 + Math.sin(i * 0.8) * 15;
+
+                    const node = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "circle",
+                    );
+                    node.setAttribute("cx", x);
+                    node.setAttribute("cy", y);
+                    node.setAttribute("r", 6);
+                    node.setAttribute("class", "node");
+                    leftGroup.appendChild(node);
+
+                    leftNodes.push({ x, y });
+
+                    if (i > 0) {
+                        const line = document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "line",
+                        );
+                        line.setAttribute("x1", leftNodes[i - 1].x);
+                        line.setAttribute("y1", leftNodes[i - 1].y);
+                        line.setAttribute("x2", x);
+                        line.setAttribute("y2", y);
+                        line.setAttribute("class", "link");
+                        leftGroup.appendChild(line);
+                    }
+                }
+
+                const rightNodes = [];
+                for (let i = 0; i < nodeCount; i++) {
+                    const y = actualSpacing * (i + 1);
+                    const x = 25 + Math.sin(i * 1.2) * 15;
+
+                    const node = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "circle",
+                    );
+                    node.setAttribute("cx", x);
+                    node.setAttribute("cy", y);
+                    node.setAttribute("r", 6);
+                    node.setAttribute("class", "node");
+                    rightGroup.appendChild(node);
+
+                    rightNodes.push({ x, y });
+
+                    if (i > 0) {
+                        const line = document.createElementNS(
+                            "http://www.w3.org/2000/svg",
+                            "line",
+                        );
+                        line.setAttribute("x1", rightNodes[i - 1].x);
+                        line.setAttribute("y1", rightNodes[i - 1].y);
+                        line.setAttribute("x2", x);
+                        line.setAttribute("y2", y);
+                        line.setAttribute("class", "link");
+                        rightGroup.appendChild(line);
+                    }
+                }
+
+                console.log(
+                    "Fallback generated",
+                    nodeCount,
+                    "nodes on each side",
+                );
+            }
+
+            // Main initialization function
+            function initializeSectionNeuralNetworks() {
+                console.log("Initializing section-specific neural networks...");
+
+                // Try the ID-based method first
+                setTimeout(() => {
+                    generateSectionNeuralNetworks();
+
+                    // If no nodes were created, try the fallback method
+                    setTimeout(() => {
+                        const nodes = document.querySelectorAll(
+                            ".neural-network .node",
+                        );
+                        if (nodes.length === 0) {
+                            console.log(
+                                "No nodes found, trying fallback method...",
+                            );
+                            generateSectionNeuralNetworksFallback();
+                        }
+                    }, 200);
+                }, 100);
+            }
+
+            // Multiple event listeners to ensure it runs
+            window.addEventListener("load", initializeSectionNeuralNetworks);
+
+            document.addEventListener("DOMContentLoaded", function () {
+                setTimeout(initializeSectionNeuralNetworks, 500);
+            });
+
+            // Update on window resize
+            window.addEventListener("resize", function () {
+                console.log("Window resized, regenerating section networks...");
+                setTimeout(() => {
+                    generateSectionNeuralNetworks();
+                    setTimeout(() => {
+                        const nodes = document.querySelectorAll(
+                            ".neural-network .node",
+                        );
+                        if (nodes.length === 0) {
+                            generateSectionNeuralNetworksFallback();
+                        }
+                    }, 200);
+                }, 200);
+            });
+
+            // Update after AOS animations (if they exist)
+            if (typeof AOS !== "undefined") {
+                document.addEventListener("aos:refresh", function () {
+                    setTimeout(initializeSectionNeuralNetworks, 300);
                 });
             }
 
-            window.addEventListener("load", resizeNetworks);
-            window.addEventListener("resize", resizeNetworks);
+            // Fallback: try again after a longer delay
+            setTimeout(() => {
+                const nodes = document.querySelectorAll(
+                    ".neural-network .node",
+                );
+                if (nodes.length === 0) {
+                    console.log(
+                        "No nodes found after 3 seconds, trying final fallback...",
+                    );
+                    generateSectionNeuralNetworksFallback();
+                }
+            }, 3000);
         </script>
     </body>
 </html>
