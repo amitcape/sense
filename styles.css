@@ -346,6 +346,11 @@ footer {
 .mobile-menu-btn:hover {
     background: rgba(255, 255, 255, 0.1);
 }
+.nav-logo {
+    height: 100px; /* Adjust height as needed */
+    width: auto; /* Maintains aspect ratio */
+    display: block;
+}
 
 /* Mobile Navigation Styles */
 @media (max-width: 768px) {
@@ -488,9 +493,4 @@ footer {
     .nav-logo {
         height: 30px; /* Even smaller on very small screens */
     }
-}
-.nav-logo {
-    height: 40px; /* Adjust height as needed */
-    width: auto; /* Maintains aspect ratio */
-    display: block;
 }
