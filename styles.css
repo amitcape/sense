@@ -456,6 +456,9 @@ footer {
         padding: 1.5rem; /* Reduce padding on mobile */
         text-align: center; /* Center all content */
     }
+    .nav-logo {
+        height: 35px; /* Slightly smaller on mobile */
+    }
 }
 
 /* Very small screens */
@@ -482,4 +485,12 @@ footer {
     .container {
         padding: 1rem; /* Reduce container padding on very small screens */
     }
+    .nav-logo {
+        height: 30px; /* Even smaller on very small screens */
+    }
+}
+.nav-logo {
+    height: 40px; /* Adjust height as needed */
+    width: auto; /* Maintains aspect ratio */
+    display: block;
 }
