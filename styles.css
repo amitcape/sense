@@ -414,3 +414,72 @@ footer {
         font-size: 0.9rem;
     }
 }
+
+/* Mobile card fixes */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 1rem;
+    }
+
+    .gridCenter {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 1rem;
+        text-align: center; /* Center all content */
+    }
+
+    .cardwide .container {
+        text-align: center; /* Center content in cardwide containers */
+    }
+
+    .logo {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto; /* Center the image */
+        display: block; /* Make it a block element */
+    }
+
+    .staff {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto; /* Center the image */
+        display: block; /* Make it a block element */
+    }
+
+    .card {
+        text-align: center; /* Center text in cards */
+        padding: 1.5rem; /* Reduce padding on mobile */
+    }
+
+    .cardwide {
+        margin: 1rem auto; /* Reduce margin on mobile */
+        padding: 1.5rem; /* Reduce padding on mobile */
+        text-align: center; /* Center all content */
+    }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+    .logo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .staff {
+        width: 150px;
+        height: 150px;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .cardwide {
+        padding: 1rem;
+        margin: 0.5rem auto;
+    }
+
+    .container {
+        padding: 1rem; /* Reduce container padding on very small screens */
+    }
+}
