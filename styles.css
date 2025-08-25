@@ -462,7 +462,7 @@ footer {
         text-align: center; /* Center all content */
     }
     .nav-logo {
-        height: 35px; /* Slightly smaller on mobile */
+        height: 65px; /* Slightly smaller on mobile */
     }
 }
 
@@ -491,6 +491,6 @@ footer {
         padding: 1rem; /* Reduce container padding on very small screens */
     }
     .nav-logo {
-        height: 30px; /* Even smaller on very small screens */
+        height: 50px; /* Even smaller on very small screens */
     }
 }
